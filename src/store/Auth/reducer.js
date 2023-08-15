@@ -31,7 +31,11 @@ export const authReducer = createSlice({
       return { ...state, isLoading: action.payload };
     },
     setUserData: (state, action) => {
-      return { ...state, userData: action.payload, isLoading: false };
+      return {
+        ...state,
+        userData: { ...state.userData, ...action.payload },
+        isLoading: false,
+      };
     },
     setLoginStep: (state, action) => {
       return { ...state, loginStep: action.payload };

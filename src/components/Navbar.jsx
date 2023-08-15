@@ -4,12 +4,13 @@ import { setLogOut } from "../store/Auth/reducer";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { name } = useSelector((state) => state.authReducer.userData);
+  const { userData } = useSelector((state) => state.authReducer);
+  console.log(userData);
   return (
     <div className="navbar">
-      <span className="logo">{name}</span>
+      <span className="logo">{userData.name}</span>
       <div className="user">
-        <img alt="" />
+        <img alt="" src={userData?.profileUrl} />
         <span></span>
         <button onClick={() => dispatch(setLogOut())}>logout</button>
       </div>

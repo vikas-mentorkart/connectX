@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { userSignUp } from "../store/Auth/action";
 import { setLoginStep } from "../store/Auth/reducer";
+import Add from "../images/addAvatar.png";
 
 const Register = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, error } = useForm();
   const onSubmit = (data) => {
-    dispatch(userSignUp(data));
+    dispatch(userSignUp(data, img));
   };
+  const profileRef = useRef(null);
+  const [img, setImg] = useState(null);
   return (
     <div className="formContainer">
       <div className="formWrapper">
@@ -34,10 +37,23 @@ const Register = () => {
             placeholder="password"
             {...register("password")}
           />
-          <input required style={{ display: "none" }} type="file" id="file" />
+          <input
+            required
+            style={{ display: "none" }}
+            type="file"
+            accept="image/*"
+            ref={profileRef}
+            onChange={({ target: { files } }) => setImg(files[0])}
+          />
           <label htmlFor="file">
-            <img alt="" />
-            <span>Add an avatar</span>
+            <img
+              src={!!img ? URL.createObjectURL(img) : Add}
+              alt=""
+              style={{ height: "32px", width: "32px" }}
+            />
+            <span onClick={() => profileRef.current.click()}>
+              Add an avatar
+            </span>
           </label>
           <button onClick={handleSubmit(onSubmit)}>Sign up</button>
         </form>
