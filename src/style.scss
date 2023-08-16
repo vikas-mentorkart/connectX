@@ -118,9 +118,18 @@
         padding: 10px;
         justify-content: space-between;
         color: #ddddf7;
-
+        div img {
+          background-color: #ddddf7;
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
         .logo {
           font-weight: bold;
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
           @include tablet {
             display: none;
           }
@@ -129,14 +138,6 @@
         .user {
           display: flex;
           gap: 10px;
-
-          img {
-            background-color: #ddddf7;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-          }
 
           button {
             background-color: #5d5b8d;

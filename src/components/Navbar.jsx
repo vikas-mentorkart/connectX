@@ -8,10 +8,11 @@ const Navbar = () => {
   console.log(userData);
   return (
     <div className="navbar">
-      <span className="logo">{userData.name}</span>
-      <div className="user">
+      <div style={{ display: "flex" }}>
         <img alt="" src={userData?.profileUrl} />
-        <span></span>
+        <span className="logo">{userData.name}</span>
+      </div>
+      <div className="user">
         <button onClick={() => dispatch(setLogOut())}>logout</button>
       </div>
     </div>

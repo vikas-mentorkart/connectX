@@ -22,7 +22,7 @@ const Chats = () => {
               dispatch(setActiveChat(item));
             }}
           >
-            <img alt="" />
+            <img alt="" src={item?.profileUrl} />
             <div className="userChatInfo">
               <span>{item.name}</span>
               <div

@@ -26,9 +26,10 @@ const Messages = () => {
   }, [chats]);
   return (
     <div className="messages" ref={divRef}>
-      {(chats || []).map((item, i) => (
-        <Message message={item} key={i} />
-      ))}
+      {chats.length > 1 &&
+        chats.map((item, i) => {
+          if (i > 0) return <Message message={item} key={i} />;
+        })}
     </div>
   );
 };

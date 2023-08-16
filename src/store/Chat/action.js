@@ -22,7 +22,7 @@ export const addFriend = (email) => async (dispatch, getState) => {
   );
   get(friendRef)
     .then(async (snap) => {
-      const { name, uid, email, friends } = userData;
+      const { name, uid, email, friends, profileUrl } = userData;
       const friend = Object.values(snap.val())[0];
       const exists = !!friends.filter((item) => {
         return item.uid === friend.uid;
@@ -34,13 +34,18 @@ export const addFriend = (email) => async (dispatch, getState) => {
       const updates = {};
       updates[`users/${userData?.uid}/friends`] = JSON.stringify([
         ...userData.friends,
-        { uid: friend?.uid, name: friend?.name, email: friend?.email },
+        {
+          uid: friend?.uid,
+          name: friend?.name,
+          email: friend?.email,
+          profileUrl: friend?.profileUrl,
+        },
       ]);
       await update(ref(db), updates);
       const updates2 = {};
       updates2[`users/${friend.uid}/friends`] = JSON.stringify([
         ...JSON.parse(friend?.friends),
-        { uid, email, name },
+        { uid, email, name, profileUrl },
       ]);
       await update(ref(db), updates2);
       await dispatch(addChat({ friendUid: friend.uid, uid, message: "" }));

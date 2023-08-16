@@ -1,12 +1,14 @@
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userSignUp } from "../store/Auth/action";
 import { setLoginStep } from "../store/Auth/reducer";
 import Add from "../images/addAvatar.png";
+import { PropagateLoader } from "react-spinners";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const { isLoading } = useSelector((state) => state.authReducer);
   const { register, handleSubmit, error } = useForm();
   const onSubmit = (data) => {
     dispatch(userSignUp(data, img));
@@ -55,7 +57,9 @@ const Register = () => {
               Add an avatar
             </span>
           </label>
-          <button onClick={handleSubmit(onSubmit)}>Sign up</button>
+          <button onClick={handleSubmit(onSubmit)}>
+            {isLoading ? <PropagateLoader color="#ffffff" /> : "Sign in"}
+          </button>
         </form>
         <p>
           You do have an account?{" "}
