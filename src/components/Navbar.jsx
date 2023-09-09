@@ -5,7 +5,6 @@ import { setLogOut } from "../store/Auth/reducer";
 const Navbar = () => {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.authReducer);
-  console.log(userData);
   return (
     <div className="navbar">
       <div style={{ display: "flex" }}>

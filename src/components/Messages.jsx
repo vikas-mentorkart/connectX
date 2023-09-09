@@ -12,11 +12,10 @@ const Messages = () => {
   const { chats } = useSelector((state) => state.chatReducer);
   const uid = getUid();
   useEffect(() => {
-    const chatRef = ref(db, "chats");
+    const chatRef = ref(db, `chats/${uid}`);
     onChildChanged(chatRef, (snap) => {
       const chats = JSON.parse(snap.val());
-      if (!!uid && uid !== chats[chats.length - 1].recieverId)
-        dispatch(setChat(chats));
+      dispatch(setChat(chats));
     });
   }, [uid]);
   useEffect(() => {
